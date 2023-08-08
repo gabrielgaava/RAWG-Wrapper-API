@@ -1,8 +1,7 @@
 // Import the express in typescript file
 import express from 'express';
-import { load } from 'ts-dotenv';
-import { Games } from './service/games';
- 
+import {createRoutes} from "./routes";
+
 // Initialize the express engine
 const app: express.Application = express();
  
@@ -11,12 +10,15 @@ const port: number = 3000;
  
 // Handling '/' Request
 app.get('/', async (_req, _res) => {
-    const data = await Games.list({});
-    _res.send(data);
+
+  _res.send("Hello World!");
+ 
 });
+
+createRoutes(app);
+
  
 // Server setup
 app.listen(port, () => {
-    console.log(`TypeScript with Express
-         http://localhost:${port}/`);
+    console.log(`> TypeScript with Express -> http://localhost:${port}/`);
 });

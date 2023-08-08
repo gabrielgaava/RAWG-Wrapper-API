@@ -1,7 +1,20 @@
+import { IShortScreenshots } from "./IScreenshot";
+
 export interface IPlataform {
     platform: number,
     name: string;
     slug: string;
+}
+
+export interface IPlataformGame{
+    platform: {
+        id: number,
+        name: string,
+        slug: string,
+        games_count: number,
+        image_background: string,
+    },
+    released_at: string,
 }
 
 export interface IMetacritic {
@@ -15,6 +28,35 @@ export interface IRatings {
     title: string;
     count: number;
     percent: number;
+}
+
+export interface IGameTag {
+    id: number,
+    name: string,
+    slug: string,
+    language: string,
+    games_count: number,
+    image_background: string,
+}
+
+export interface IGameStore {
+    id: number,
+    store: {
+        id: number,
+        name: string,
+        slug: string,
+        domain: string,
+        games_count: number,
+        image_background: string
+    }
+}
+
+export interface IGameGenre {
+    id: number,
+    name: string,
+    slug: string,
+    games_count: number,
+    image_background: string,
 }
 
 export interface IGameDetails {
@@ -136,5 +178,43 @@ export interface IGameDetails {
         name: string,
         slug: string
     },
-    clip: null,
+}
+
+export interface IGame {
+    id: number,
+    slug: string,
+    name: string,
+    released: string,
+    tba: boolean,
+    background_image: string,
+    rating: number,
+    rating_top: number,
+    ratings: IRatings[],
+    ratings_count: number,
+    reviews_text_count: number,
+    added: number,
+    metacritic: number,
+    playtime: number,
+    suggestions_count: number,
+    updated: string,
+    reviews_count: number,
+    saturated_color: string,
+    dominant_color: string,
+    platforms: IPlataformGame[],
+    genres: IGameGenre[],
+    stores: IGameStore[],
+    tags: IGameTag[],
+    esrb_rating: {
+        id: number,
+        name: string,
+        slug: string,
+    },
+    short_screenshots: IShortScreenshots[]
+}
+
+export interface IGamesListResponse {
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: IGame[],
 }
