@@ -1,24 +1,23 @@
 // Import the express in typescript file
 import express from 'express';
+import serverless from 'serverless-http';
 import {createRoutes} from "./routes";
 
 // Initialize the express engine
-const app: express.Application = express();
+const app = express();
+const router: express.Application = express();
  
 // Take a port 3000 for running server.
-const port: number = 3000;
+// const port: number = 3000;
  
 // Handling '/' Request
-app.get('/', async (_req, _res) => {
-
+router.get('/', async (_req, _res) => {
   _res.send("Hello World!");
- 
 });
 
-createRoutes(app);
+createRoutes(router);
 
  
 // Server setup
-app.listen(port, () => {
-    console.log(`> TypeScript with Express -> http://localhost:${port}/`);
-});
+app.use('/.netlify/functions/api', router);
+module.exports.handler = serverless(app);
